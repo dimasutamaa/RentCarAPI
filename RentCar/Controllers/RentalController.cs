@@ -37,6 +37,7 @@ namespace RentCar.Controllers
                                 rental_date = x.rental_date,
                                 return_date = x.return_date,
                                 car_name = x.MsCar.name,
+                                car_model = x.MsCar.model,
                                 price_per_day = x.MsCar.price_per_day,
                                 total_price = x.total_price,
                                 payment_status = x.payment_status,
