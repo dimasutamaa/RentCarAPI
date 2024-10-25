@@ -14,6 +14,6 @@ namespace RentCar.Models
         public string transmission { get; set; }
         public decimal price_per_day { get; set; }
         public bool status { get; set; }
-        public ICollection<MsCarImages> car_images { get; set; } 
+        public ICollection<MsCarImages> car_images { get; set; }
     }
 }

@@ -35,7 +35,7 @@ namespace RentCar.Controllers
                             transmission = x.transmission,
                             price_per_day = x.price_per_day,
                             status = x.status,
-                            car_images = x.car_images,
+                            car_images = x.car_images
                         })
                         .ToListAsync();
 
@@ -50,9 +50,38 @@ namespace RentCar.Controllers
 
         // GET api/<CarController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<GetCarResult>> Get(string id)
         {
-            return "value";
+            var car = await _context.msCar
+                        .Include(x => x.car_images)
+                        .Where(x => x.Car_id == id)
+                        .Select(x => new GetCarResult()
+                        {
+                            Car_id = x.Car_id,
+                            name = x.name,
+                            model = x.model,
+                            year = x.year,
+                            license_plate = x.license_plate,
+                            number_of_car_seats = x.number_of_car_seats,
+                            transmission = x.transmission,
+                            price_per_day = x.price_per_day,
+                            status = x.status,
+                            car_images = x.car_images,
+                        })
+                        .FirstOrDefaultAsync();
+
+            if(car == null)
+            {
+                return NotFound("Car not found");
+            }
+
+            var response = new ApiResponse<GetCarResult>
+            {
+                StatusCode = StatusCodes.Status200OK,
+                RequestMethod = HttpContext.Request.Method,
+                Data = car
+            };
+            return Ok(response);
         }
 
         // POST api/<CarController>
