@@ -12,5 +12,6 @@ namespace RentCar.Data
         public DbSet<MsCar> msCar { get; set; }
         public DbSet<MsCarImages> msCarImages { get; set; }
         public DbSet<TrRental> trRental { get; set; } 
+        public DbSet<MsCustomer> msCustomer { get; set; }
     }
 }
