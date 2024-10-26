@@ -1,22 +1,23 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace RentCar.Models
+namespace RentCar.Models.Requests
 {
-    public class TrRental
+    public class RentCarRequest
     {
-        [Key]
-        [MaxLength(36)]
-        [RegularExpression("RTD[0-9][0-9][0-9]")]
+        [Required]
         public string Rental_id { get; set; }
+        [Required]
         public DateTime rental_date { get; set; }
+        [Required]
         public DateTime return_date { get; set; }
+        [Required]
         public decimal total_price { get; set; }
+        [Required]
         public bool payment_status { get; set; }
-        [ForeignKey("MsCustomer")]
+        [Required]
         public string customer_id { get; set; }
-        [ForeignKey("MsCar")]
+        [Required]
         public string car_id { get; set; }
-        public MsCar MsCar { get; set; }
     }
 }
