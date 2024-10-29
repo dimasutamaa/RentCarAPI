@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using RentCar.Data;
 using RentCar.Models;
 using RentCar.Models.Requests;
+using RentCar.Models.Results;
 using RentCar.Services;
 using System.Security.Cryptography;
 
@@ -64,7 +65,14 @@ namespace RentCar.Controllers
                 _context.msCustomer.Add(customer);
                 await _context.SaveChangesAsync();
 
-                return Ok("Customer registered successfully");
+                var response = new ApiResponse<string>
+                {
+                    StatusCode = StatusCodes.Status201Created,
+                    RequestMethod = HttpContext.Request.Method,
+                    Data = "Customer registered successfully"
+                };
+
+                return Ok(response);
             }
             catch (Exception ex)
             {
@@ -96,7 +104,14 @@ namespace RentCar.Controllers
                     return BadRequest("Invalid email or password");
                 }
 
-                return Ok("Customer successfully logged in");
+                var response = new ApiResponse<string>
+                {
+                    StatusCode = StatusCodes.Status200OK,
+                    RequestMethod = HttpContext.Request.Method,
+                    Data = "Customer successfully logged in"
+                };
+
+                return Ok(response);
             }
             catch (Exception ex)
             {
